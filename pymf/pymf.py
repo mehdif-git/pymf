@@ -70,8 +70,8 @@ def rad_profile(image, pixel_size_arcmin, return_k=False):
 	else:
 		k = np.copy(r)
 
-	#r = np.round(r).astype(np.int)
-	r_int = r.astype(np.int)
+	#r = np.round(r).astype(np.int64)
+	r_int = r.astype(np.int64)
 
 	weight = np.bincount(r_int.ravel())
 	kradialprofile = np.bincount(r_int.ravel(), k.ravel()) / weight
@@ -204,7 +204,7 @@ def make_filter_map(reference_image, x, profile):
 	r = np.sqrt((XX - nxpix//2.)**2 + (YY - nypix//2.)**2)
 	r=r.ravel()
 
-	image = np.interp(r, x, profile)
+	image = np.int64erp(r, x, profile)
 	image = image.reshape(nxpix,nypix)
 
 	return(image)
